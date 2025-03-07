@@ -1,7 +1,7 @@
 # People Detection & Tracking System
 
 ## 📌 Overview
-Proyek ini adalah sistem deteksi dan pelacakan orang menggunakan **YOLO** yang dikembangkan dengan **Flask** sebagai backend dan **Streamlit** sebagai frontend. Sistem ini juga menyimpan area deteksi ke **MongoDB Atlas** untuk analisis lebih lanjut.
+sistem deteksi dan pelacakan orang menggunakan **YOLO** yang dikembangkan dengan **Flask** sebagai backend dan **Streamlit** sebagai frontend. Sistem ini juga menyimpan area deteksi ke **MongoDB Atlas** untuk analisis lebih lanjut.
 
 ---
 
