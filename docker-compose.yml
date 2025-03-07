@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  flask_app:
+    build: .
+    container_name: people-area-tracker
+    ports:
+      - "5000:5000"
+      - "8501:8501"
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    command: >
+      sh -c "python /app/src/main.py & streamlit run /app/src/dashboard.py --server.port=8501 --server.address=0.0.0.0"
