@@ -61,7 +61,7 @@ Akses aplikasi di **localhost**:
 
 ---
 
-## 🛠 Installation
+## 🛠 Installation (TANPA DOCKER)
 ### 1️⃣ Setup MongoDB Atlas (Optional: sudah dapat dijalankan menggunakan client bawaan saya)
 1. **Buat Cluster MongoDB Atlas** di [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 2. **Buat Database & Collection**:
