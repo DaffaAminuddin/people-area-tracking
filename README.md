@@ -56,8 +56,8 @@ docker-compose down
 ```
 
 Akses aplikasi di **localhost**:
-- Flask (Backend): [http://localhost:5000](http://localhost:5000)
-- Streamlit (Frontend): [http://localhost:8501](http://localhost:8501)
+- Flask (Backend): [http://localhost:5000](http://localhost:5000) (Untuk API)
+- Streamlit (Frontend): [http://localhost:8501](http://localhost:8501) (Dashboard)
 
 ---
 
