@@ -208,6 +208,6 @@ elif pilihan == "Setting Area":
 
     else:
         st.error("Tidak dapat menampilkan frame.")
-
+    st.warning("Akan terjadi error saat berhasil save Poligon, dikarenan backend restart otomatis, cukup refresh halaman")
     st.info("Saat berganti menu, Harap tunggu berberapa saat jika tidak muncul UI (video feed, Stat, dan Setting area)")
 
