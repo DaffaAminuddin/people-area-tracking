@@ -23,6 +23,8 @@ Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan deng
 ---
 ![dynamic polygon](https://img.mesinpintar.com/poligon2.gif)
 
+![People Detection and Tracking](https://img.mesinpintar.com/tracking.gif)
+
 
 ## ⚙️ Desain
 
@@ -35,8 +37,6 @@ Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan deng
    - Menampilkan video streaming dari backend.
    - Memvisualisasikan statistik deteksi orang.
    - Memungkinkan pengguna menggambar area deteksi dan menyimpannya ke database.
-
-![People Detection and Tracking](https://img.mesinpintar.com/tracking.gif)
 
 3. **Desain Database (MongoDB Atlas - NoSQL)**
    - **Collection `area`**: Menyimpan koordinat poligon untuk area deteksi. Berisi`area_coords` dan `area_name`
