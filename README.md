@@ -74,7 +74,7 @@ Penyimpanan Hasil Deteksi:
 
 Relasi antara Tabel/`Collection` Deteksi (`people`dan`counter`) dan Tabel Konfigurasi Area Polygon/`area`:
 - Relasi Langsung: Collection `area` menyimpan data konfigurasi area deteksi berupa koordinat poligon. Data ini digunakan sebagai referensi untuk memvalidasi posisi objek dari hasil deteksi.
-- Proses Validasi: Setiap kali manusia terdeteksi, sistem memeriksa apakah koordinatnya berada di dalam poligon dari area. Proses ini melibatkan algoritma seperti point-in-polygon.
+- Proses Validasi: Setiap kali manusia terdeteksi, sistem memeriksa apakah koordinatnya berada di dalam poligon dari area.
 - Kebergantungan: Deteksi dan pelacakan manusia tidak dapat dilakukan tanpa data konfigurasi area (dari koleksi area), karena data ini menentukan apakah seseorang dianggap berada di dalam (IN) atau di luar (OUT) area pengawasan. Lalu setiap orang yang terdeteksi akan tersimpan juga bersamaan dengan `track_id`, `action` dan `  
 datetime`, setiap data pada collection `counter` menyimpan `area_coords`
 
