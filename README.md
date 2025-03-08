@@ -23,7 +23,7 @@ Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan deng
 ---
 ![dynamic polygon](https://img.mesinpintar.com/poligon2.gif)
 
-![People Detection and Tracking](https://img.mesinpintar.com/tracking.gif)
+![People Detection and Tracking]([https://img.mesinpintar.com/tracking.gif](https://d1tnmkmhr2jcsa.cloudfront.net/w2uf5s%2Fpreview%2F65138826%2Fmain_full.gif?response-content-disposition=inline%3Bfilename%3D%22main_full.gif%22%3B&response-content-type=image%2Fgif&Expires=1741394268&Signature=U2Z2d5jzAVUSFyqNLzike8yzBjic4U1N0lNs9yzaE6GbYYRT3vXZ7RKsK5866Bz3mcaV~HAMmpy6g2-9RGaWyibg5wiIFxM4yDpN63A5oAJ5gvtCfqUEFXhJMQHk6vSrvEzkVx8rBBXKsOyP1oa056ACzHkQdTyX6CIJzMZoqRjYapOkIGLuZLuB9ySzxUWYqg-qWXuX165Iny2X5sNfC2Dz7yk39433J1ZE41e-Kk4WNyhMhq0SSvcuFjVTOPlzZM~Y103Jw-SpmZkFtcIHRTdy7GEzzXC9cRz~vytzD14YvaCkAwsWwoMc7rvKZI7tZz4BSOPQqKNXUx~5XVUTuA__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ))
 
 
 ## ⚙️ Desain
