@@ -3,11 +3,17 @@
 
 ## 🎯 Checklist Fitur
 ✔ **Desain Database  (Done)**  
+
 ✔ **Pengumpulan Dataset (Done)**  ket: lebih lengkap dibawah
+
 ✔ **Object Detection & Tracking (Done)**  Keterangan: Video feed Live, object detection dan tracking berjalan
+
 ✔ **Counting & Polygon Area  (Done)** Keterangan: Counting di Polygon area berfungsi, area polygon dynamis (dapat diatur user)
+
 ❌ **Prediksi (Forecasting) (X)** keterangan: Menampilkan hasil deteksi, counting kurang prediksi, kendala = waktu
+
 ✔ **Integrasi API (API/Front End) (Done)**  Ket: lebih lengkap dibawah
+
 ✔ **Deployment (Done)**  Docker
 
 ---
