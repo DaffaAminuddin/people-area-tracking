@@ -67,8 +67,9 @@ datetime`, setiap data pada collection `counter` menyimpan `area_coords`
 
 ---
 
-![People Detection and Tracking](https://img.mesinpintar.com/tracking.gif)
+![tracking](https://img.mesinpintar.com/tracking.gif)
 
+![dynamic polygon](https://img.mesinpintar.com/poligon2.gif)
 
 ## 📂 Folder Structure
 
