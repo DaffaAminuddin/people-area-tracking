@@ -1,5 +1,6 @@
 
 
+
 # People Detection & Tracking System
 
 ## 🎯 Checklist Fitur
@@ -78,23 +79,17 @@ Relasi antara Tabel/`Collection` Deteksi (`people`dan`counter`) dan Tabel Konfig
 datetime`, setiap data pada collection `counter` menyimpan `area_coords`
 
 ---
-
-
-## 📂 Folder Structure
-
-```
-/project-root
-│── scr/
-│   │── main.py             # Flask Backend
-│   │── tracker1.py         # Tracking Logic
-│   │── dashboard.py        # Streamlit Frontend
-│   │── yolo11l.pt          # Model YOLO
-│   │── best-1.pt           # Model YOLO hasil training 1
-│   │── best-2.pt           # Model YOLO hasil training 2
-│── requirements.txt        # Dependencies
-│── Dockerfile              # Docker Build Config
-│── docker-compose.yml      # Docker Compose Config
-```
+## 📌 Dataset dan Model YOLO
+Model **best-1.pt** dan **best-2.pt** adalah hasil training **YOLOv11** menggunakan dataset dari **CCTV Malioboro**:
+- **Sumber Data CCTV**:
+  - [Nol Km Utara](https://cctvjss.jogjakota.go.id/malioboro/NolKm_Utara.stream/playlist.m3u8)
+  - [Pasar Beringharjo](https://cctvjss.jogjakota.go.id/malioboro/Malioboro_30_Pasar_Beringharjo.stream/playlist.m3u8)
+- **Jumlah Data**:
+  - **Train**: 234 data
+  - **Validation**: 45 data
+  - **Test**: 11 data
+- **Pengujian**: Menggunakan video feed dari **[Depan DPRD Malioboro](https://cctvjss.jogjakota.go.id/malioboro/Malioboro_4_Depan_DPRD.stream/playlist.m3u8)**
+- **Dataset dapat diakses** pada file 	`dataset` dan hasil training terbaru di folder `runs`
 
 ---
 
@@ -144,20 +139,7 @@ streamlit run src/dashboard.py
 
 Akses aplikasi di **localhost**:
 - Flask (Backend): [http://localhost:5000](http://localhost:5000)
-- Streamlit (Frontend): [http://localhost:8501](http://localhost:8501)
-
----
-
-## 📌 Dataset dan Model YOLO
-Model **best-1.pt** dan **best-2.pt** adalah hasil training **YOLOv11** menggunakan dataset dari **CCTV Malioboro**:
-- **Sumber Data CCTV**:
-  - [Nol Km Utara](https://cctvjss.jogjakota.go.id/malioboro/NolKm_Utara.stream/playlist.m3u8)
-  - [Pasar Beringharjo](https://cctvjss.jogjakota.go.id/malioboro/Malioboro_30_Pasar_Beringharjo.stream/playlist.m3u8)
-- **Jumlah Data**:
-  - **Train**: 234 data
-  - **Validation**: 45 data
-  - **Test**: 11 data
-- **Pengujian**: Menggunakan video feed dari **[Depan DPRD Malioboro](https://cctvjss.jogjakota.go.id/malioboro/Malioboro_4_Depan_DPRD.stream/playlist.m3u8)**
+- Streamlit (Frontend): [http://localhost:8501](http://localhost:8501) (dashboard)
 
 ---
 
@@ -171,6 +153,24 @@ Model **best-1.pt** dan **best-2.pt** adalah hasil training **YOLOv11** mengguna
 
 ---
 
+## 📂 Folder Structure
+
+```
+/project-root
+│── scr/
+│   │── main.py             # Flask Backend
+│   │── tracker1.py         # Tracking Logic
+│   │── dashboard.py        # Streamlit Frontend
+│   │── yolo11l.pt          # Model YOLO
+│   │── best-1.pt           # Model YOLO hasil training 1
+│   │── best-2.pt           # Model YOLO hasil training 2
+│── requirements.txt        # Dependencies
+│── Dockerfile              # Docker Build Config
+│── docker-compose.yml      # Docker Compose Config
+```
+
+---
+
 ## 📌 Notes
 - Pastikan Anda memiliki akses ke **MongoDB Atlas** sebelum menjalankan aplikasi. (Sudah saya buka akses untuk siapapun)
 - Gunakan **Docker Compose** untuk mempermudah deployment.
@@ -178,6 +178,6 @@ Model **best-1.pt** dan **best-2.pt** adalah hasil training **YOLOv11** mengguna
 
 ---
 
-## ✨ Credits
-Developed by **Daffa Aminuddin** 🚀
+## Credits
+Developed by **Daffa Aminuddin**
 
