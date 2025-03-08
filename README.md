@@ -43,7 +43,7 @@ Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan deng
    - **Collection `people`**: Menyimpan `track_id` orang dan aksi (`IN` atau `OUT`) serta `datetime`
    - **Collection `counter`**: Menyimpan data terbaru dari `inside_count`, `in_count`, `out_count`, dan `area_coords`
 
-![tracking]((https://img.mesinpintar.com/tracking-compress.gif)
+![tracking](https://img.mesinpintar.com/tracking-compress.gif)
  
 4. **Pertimbangan Desain**
 Desain Sistem untuk Mengambil Input Video dan Melakukan Deteksi
