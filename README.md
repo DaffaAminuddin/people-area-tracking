@@ -22,8 +22,7 @@
 Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan dengan **Flask** sebagai backend dan **Streamlit** sebagai frontend. Sistem ini juga menyimpan hasil deteksi dan area poligon ke **MongoDB Atlas** untuk integrasi API.
 
 ---
-![dynamic polygon](https://img.mesinpintar.com/poligon2.gif)
-
+![tracking](https://img.mesinpintar.com/tracking-compress.gif)
 
 ![diagram_system](https://img.mesinpintar.com/diagram_system.jpg)
 
@@ -35,10 +34,14 @@ Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan deng
    - Menggunakan **YOLO11** dari Ultralytics untuk mendeteksi objek **"person"** di setiap frame.
    - Menyediakan API untuk streaming video dengan deteksi objek.
    - Setiap bounding box yang terdeteksi dikirim ke **tracker** dan diberi `track_id` unik. Titik tengah dari bounding box akan ditandai, titik tengah yang berdekatan dari posisi pada frame sebelumnya akan ditandai `track_id` yg sama sehingga menjadi `Tracking`.
+   - Area koordinat polygon `polygon_coords`akan diload dari database, lalu diaplikasikan ke `video_feed`
    - Cek apakah **centroid bounding box** melewati batas poligon yang sudah disimpan di **MongoDB**
    - Menyimpan dan mengambil area deteksi dari MongoDB Atlas.
    - Jika melewati dari luar ke dalam → **"IN"**, Jika melewati dari dalam ke luar → **"OUT"**
    - Menghitung statistik orang masuk, keluar, dan yang berada di dalam area. MongoDB menyimpan **jumlah orang di dalam area, total masuk/keluar**
+   - `setting area`= mengubah area polygon, dilakukan di dashboard dengan membuat titik-titik membentuk polygon lalu akan didapatkan koordinat titik tersebut. Oleh sistem akan disimpan ke database collection `area`, dan akan di load area polygon tersebut ketika sistem restart.
+   
+![dynamic polygon](https://img.mesinpintar.com/poligon2.gif)
 
 2. **Frontend (Streamlit - `dashboard.py`)**
    - Menampilkan video streaming dari backend.
@@ -51,8 +54,6 @@ Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan deng
    - **Collection `area`**: Menyimpan koordinat poligon untuk area deteksi. Berisi`area_coords` dan `area_name`
    - **Collection `people`**: Menyimpan `track_id` orang dan aksi (`IN` atau `OUT`) serta `datetime`
    - **Collection `counter`**: Menyimpan data terbaru dari `inside_count`, `in_count`, `out_count`, dan `area_coords`
-
-![tracking](https://img.mesinpintar.com/tracking-compress.gif)
  
 4. **Pertimbangan Desain**
 Desain Sistem untuk Mengambil Input Video dan Melakukan Deteksi
