@@ -1,4 +1,5 @@
 
+
 # People Detection & Tracking System
 
 ## 🎯 Checklist Fitur
@@ -24,19 +25,27 @@ Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan deng
 ![dynamic polygon](https://img.mesinpintar.com/poligon2.gif)
 
 
+![diagram_system](https://img.mesinpintar.com/diagram_system.jpg)
 
+## ⚙️ Desain Sistem
 
-## ⚙️ Desain
-
-1. **Backend (Flask - `main.py`)**
+1. **Backend (Flask - `main.py`dan `tracker1.py`)**
+   - Flask menerima input video dari file/Live url dengan `cv2.VideoCapture()`
+   - Video dibaca perframe dan frame diproses dalam loop dan dikirim ke **YOLO11** untuk deteksi
+   - Menggunakan **YOLO11** dari Ultralytics untuk mendeteksi objek **"person"** di setiap frame.
    - Menyediakan API untuk streaming video dengan deteksi objek.
+   - Setiap bounding box yang terdeteksi dikirim ke **tracker** dan diberi `track_id` unik. Titik tengah dari bounding box akan ditandai, titik tengah yang berdekatan dari posisi pada frame sebelumnya akan ditandai `track_id` yg sama sehingga menjadi `Tracking`.
+   - Cek apakah **centroid bounding box** melewati batas poligon yang sudah disimpan di **MongoDB**
    - Menyimpan dan mengambil area deteksi dari MongoDB Atlas.
-   - Menghitung statistik orang masuk, keluar, dan yang berada di dalam area.
+   - Jika melewati dari luar ke dalam → **"IN"**, Jika melewati dari dalam ke luar → **"OUT"**
+   - Menghitung statistik orang masuk, keluar, dan yang berada di dalam area. MongoDB menyimpan **jumlah orang di dalam area, total masuk/keluar**
 
 2. **Frontend (Streamlit - `dashboard.py`)**
    - Menampilkan video streaming dari backend.
    - Memvisualisasikan statistik deteksi orang.
    - Memungkinkan pengguna menggambar area deteksi dan menyimpannya ke database.
+
+![diagram-db](https://img.mesinpintar.com/diagram_db.jpg)
 
 3. **Desain Database (MongoDB Atlas - NoSQL)**
    - **Collection `area`**: Menyimpan koordinat poligon untuk area deteksi. Berisi`area_coords` dan `area_name`
