@@ -1,11 +1,24 @@
+
 # People Detection & Tracking System
 
-## 📌 Overview
-sistem deteksi dan pelacakan orang menggunakan **YOLO** yang dikembangkan dengan **Flask** sebagai backend dan **Streamlit** sebagai frontend. Sistem ini juga menyimpan area deteksi ke **MongoDB Atlas** untuk integrasi API.
+## 🎯 Checklist Fitur
+✔ **Desain Database  (Done)**  
+✔ **Pengumpulan Dataset (Done)**  ket: lebih lengkap dibawah
+✔ **Object Detection & Tracking (Done)**  Keterangan: Video feed Live, object detection dan tracking berjalan
+✔ **Counting & Polygon Area  (Done)** Keterangan: Counting di Polygon area berfungsi, area polygon dynamis (dapat diatur user)
+❌ **Prediksi (Forecasting) (X)** keterangan: Menampilkan hasil deteksi, counting kurang prediksi, kendala = waktu
+✔ **Integrasi API (API/Front End) (Done)**  Ket: lebih lengkap dibawah
+✔ **Deployment (Done)**  Docker
 
 ---
+## 📌 Overview
+Sistem deteksi dan pelacakan orang menggunakan **YOLO11** yang dikembangkan dengan **Flask** sebagai backend dan **Streamlit** sebagai frontend. Sistem ini juga menyimpan hasil deteksi dan area poligon ke **MongoDB Atlas** untuk integrasi API.
 
-## ⚙️ System Architecture
+---
+![dynamic polygon](https://img.mesinpintar.com/poligon2.gif)
+
+
+## ⚙️ Desain
 
 1. **Backend (Flask - `main.py`)**
    - Menyediakan API untuk streaming video dengan deteksi objek.
@@ -17,10 +30,34 @@ sistem deteksi dan pelacakan orang menggunakan **YOLO** yang dikembangkan dengan
    - Memvisualisasikan statistik deteksi orang.
    - Memungkinkan pengguna menggambar area deteksi dan menyimpannya ke database.
 
-3. **Database (MongoDB Atlas - NoSQL)**
-   - **Collection `area`**: Menyimpan koordinat poligon untuk area deteksi.
-   - **Collection `people`**: Menyimpan `track_id` orang dan aksi (`IN` atau `OUT`).
-   - **Collection `counter`**: Menyimpan data terbaru dari `inside_count`, `in_count`, dan `out_count`.
+![Tracking]([URL-KE-GIF](https://img.mesinpintar.com/tracking.gif)
+
+3. **Desain Database (MongoDB Atlas - NoSQL)**
+   - **Collection `area`**: Menyimpan koordinat poligon untuk area deteksi. Berisi`area_coords` dan `area_name`
+   - **Collection `people`**: Menyimpan `track_id` orang dan aksi (`IN` atau `OUT`) serta `datetime`
+   - **Collection `counter`**: Menyimpan data terbaru dari `inside_count`, `in_count`, `out_count`, dan `area_coords`
+ 
+4. **Pertimbangan Desain**
+Desain Sistem untuk Mengambil Input Video dan Melakukan Deteksi
+Pipeline Deteksi:
+  - Sistem akan menerima input berupa streaming video atau file video.
+  - Gunakan framework deteksi seperti OpenCV untuk membaca frame dari video secara real-time.
+ - Jalankan algoritma deteksi objek (`YOLO`) untuk mendeteksi keberadaan manusia di setiap frame.
+- Setiap objek yang terdeteksi akan diberi `track_id` unik menggunakan algoritma pelacakan.
+
+Validasi dengan Area Deteksi:           
+- Setelah manusia terdeteksi, koordinat mereka (bounding box atau titik tengah) akan dibandingkan dengan koleksi area di database.
+- Validasi apakah objek berada di dalam atau di luar area poligon yang telah dikonfigurasi.
+
+Penyimpanan Hasil Deteksi:
+- Simpan `track_id`, lokasi (dalam atau luar area), dan aksi (IN atau OUT) di koleksi people dalam database collection `people`.
+- Perbarui data agregasi (inside_count, in_count, out_count) pada koleksi `counter` untuk memberikan statistik terbaru.
+
+Relasi antara Tabel/`Collection` Deteksi (`people`dan`counter`) dan Tabel Konfigurasi Area Polygon/`area`:
+- Relasi Langsung: Collection `area` menyimpan data konfigurasi area deteksi berupa koordinat poligon. Data ini digunakan sebagai referensi untuk memvalidasi posisi objek dari hasil deteksi.
+- Proses Validasi: Setiap kali manusia terdeteksi, sistem memeriksa apakah koordinatnya berada di dalam poligon dari area. Proses ini melibatkan algoritma seperti point-in-polygon.
+- Kebergantungan: Deteksi dan pelacakan manusia tidak dapat dilakukan tanpa data konfigurasi area (dari koleksi area), karena data ini menentukan apakah seseorang dianggap berada di dalam (IN) atau di luar (OUT) area pengawasan. Lalu setiap orang yang terdeteksi akan tersimpan juga bersamaan dengan `track_id`, `action` dan `  
+datetime`, setiap data pada collection `counter` menyimpan `area_coords`
 
 ---
 
@@ -33,9 +70,8 @@ sistem deteksi dan pelacakan orang menggunakan **YOLO** yang dikembangkan dengan
 │   │── tracker1.py         # Tracking Logic
 │   │── dashboard.py        # Streamlit Frontend
 │   │── yolo11l.pt          # Model YOLO
-│   │── best-1.pt           # Model YOLO alternatif
-│   │── best-2.pt           # Model YOLO alternatif kedua
-│   │── dprd.mp4            # Sample Video
+│   │── best-1.pt           # Model YOLO hasil training 1
+│   │── best-2.pt           # Model YOLO hasil training 2
 │── requirements.txt        # Dependencies
 │── Dockerfile              # Docker Build Config
 │── docker-compose.yml      # Docker Compose Config
@@ -43,7 +79,7 @@ sistem deteksi dan pelacakan orang menggunakan **YOLO** yang dikembangkan dengan
 
 ---
 
-## 🚀 Deployment dengan Docker
+## Deployment dengan Docker
 ### 1️⃣ Build dan Jalankan dengan Docker Compose
 ```bash
 docker-compose up --build
@@ -61,7 +97,7 @@ Akses aplikasi di **localhost**:
 
 ---
 
-## 🛠 Installation (TANPA DOCKER)
+## Installation (TANPA DOCKER)
 ### 1️⃣ Setup MongoDB Atlas (Optional: sudah dapat dijalankan menggunakan client bawaan saya)
 1. **Buat Cluster MongoDB Atlas** di [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 2. **Buat Database & Collection**:
@@ -113,15 +149,6 @@ Model **best-1.pt** dan **best-2.pt** adalah hasil training **YOLOv11** mengguna
 | GET    | `/api/stats/` `/api/stats/live`        | Mendapatkan statistik deteksi       |
 | POST   | `/api/save_polygon` | Menyimpan area deteksi ke MongoDB   |
 
----
-
-## 🎯 Features
-✔ **YOLO-Based People Detection**  
-✔ **Real-time Tracking**  
-✔ **Custom Detection Area (Polygon)**  
-✔ **MongoDB Atlas Integration**  
-✔ **Web Dashboard with Streamlit**  
-✔ **Containerized with Docker**  
 
 ---
 
